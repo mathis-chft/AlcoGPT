@@ -114,11 +114,11 @@
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer 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`
+              'Authorization': `Bearer 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`
             },
             body: JSON.stringify({
               'prompt': prompt,
-              'max_tokens': 1000
+              'max_tokens': 3000,
             })
           };
     
@@ -184,7 +184,6 @@
   #chat-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
     max-width: 350px;
     height: 80vh;
     background-color: white;
