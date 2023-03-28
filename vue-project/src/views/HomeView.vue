@@ -7,19 +7,20 @@
           <strong>{{ message.sender }}:</strong> {{ message.text }}
         </div>
       </div>
-      <div id="preset-questions" class="p-4">
+      <div id="preset-questions" class="p-0.5">
         <button
           v-for="(question, index) in randomQuestions"
           :key="index"
           @click="insertPresetQuestion(question)"
           class="bg-gray-200 text-black py-2 px-4 mr-2 mb-2 rounded-md"
+          style="margin-left: 8px !important;"
         >
           {{ question }}
         </button>
       </div>
       <form @submit.prevent="sendMessage">
-        <input type="text" v-model="userInput" placeholder="Type your message...">
-        <button type="submit">Send</button>
+        <input type="text" v-model="userInput" placeholder="Tapez votre message...">
+        <button type="submit">Envoyer</button>
       </form>
     </div>
   </div>
@@ -113,7 +114,7 @@ export default {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer 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`
+            'Authorization': `Bearer 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`
           },
           body: JSON.stringify({
             'prompt': prompt,
@@ -184,7 +185,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
   height: 80vh;
   background-color: white;
   border-radius: 20px;
@@ -195,10 +196,11 @@ body {
 h1 {
   font-family: 'Roboto', sans-serif;
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 700;
   color: #ffffff;
   background-color: #000000;
   padding: 15px;
+  padding-left: 20px;
   margin: 0;
   border-bottom: 1px solid #eee;
 }
@@ -236,7 +238,6 @@ form {
 
 input[type="text"] {
   flex-grow: 1;
-  padding: 8px 12px;
   font-size: 16px;
   border: 1px solid #ffffff;
   border-radius: 10px;
