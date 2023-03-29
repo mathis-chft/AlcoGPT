@@ -108,8 +108,9 @@
         async sendToChatGPT(message) {
           const context = "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes.";
           const systemMessage = "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool";
-          const prompt = `${context}\n${systemMessage}\nUser: ${message}`;
-    
+          const messageHistory = this.messageList.map(m => `${m.sender}: ${m.text}`).join('\n');
+          const prompt = `${context}\n${systemMessage}\n${messageHistory}\nUser: ${message}`;
+          
           const requestOptions = {
             method: 'POST',
             headers: {
