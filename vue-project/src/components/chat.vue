@@ -1,7 +1,7 @@
 <template>
     <div id="app">
       <div id="chat-container">
-        <h1>AlcooloGPT</h1>
+        <h1>AlcoGPT</h1>
         <div id="messages" ref="messages">
           <div v-for="(message, index) in messageList" :key="index" :class="message.sender.toLowerCase()">
             <strong>{{ message.sender }}:</strong> {{ message.text }}
@@ -185,7 +185,7 @@
     display: flex;
     flex-direction: column;
     max-width: 450px;
-    height: 83vh;
+    height: 87vh;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);

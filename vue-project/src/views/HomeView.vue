@@ -23,3 +23,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.home {
+  overflow: hidden;
+}
+</style>

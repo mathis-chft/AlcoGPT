@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-[65%_auto]">
+    <div class="overflow-hidden grid grid-cols-[65%_auto]">
         <div class="">
             <div class="category">
                 <ProductCard
@@ -41,22 +41,22 @@
       return {
         products: [
           {
-            image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.siredwards.com%2Fwp-content%2Fuploads%2F2019%2F05%2F1ok.jpg&f=1&nofb=1&ipt=3b7e39074e18a6afa3b990f8226d4952684a67814cd2a64ef6c2c76506aff1fa&ipo=images",
-            name: "Le bon vieux whisky",
+            image: "https://assets.afcdn.com/recipe/20210312/118530_w3072h2304c1cx1060cy707.jpg",
+            name: "whisky",
           },
           {
-            image: "https://www.les-covoyageurs.com/ressources/images-lieux/photo-lieu-1167-2.jpg",
-            name: "mdr j'ai pas d'idée",
+            image: "https://nepascene.com/wp-content/uploads/2016/03/beer-glass-bar.jpg",
+            name: "Bières",
           },
         ],
         recipes: [
           {
             image: "https://images.unsplash.com/photo-1588269965522-9bd83f3f3f13?fit=fillmax&fm=jpg&ixid=eyJhcHBfaWQiOjM1NjcwfQ&ixlib=rb-1.2.1&q=75",
-            name: "Jsp quoi mettre",
+            name: "Cocktails sans alcool",
         },
         {
           image: "https://media.istockphoto.com/photos/cocktail-alcohol-drink-black-background-picture-id649976444?k=6&m=649976444&s=170667a&w=0&h=NozIbw9SW1yY_XDpmQwAr5525egAJTFhFKQiZRtmRaI=",
-          name: "narvalo je ne sais pas quoi mettre",
+          name: "Cocktails avec alcool",
         },
       ],
     };
@@ -72,7 +72,7 @@
 }
 
 .banner {
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   display: flex;
   width: 90%;
@@ -80,8 +80,9 @@
   background-image: url('https://alcohome.com/wp-content/uploads/2020/10/specialty-drinks-1.png');
   background-size: cover;
   background-position: center;
-  margin-left: auto;
+  margin-left: 32.5px !important;
   margin-right: auto;
+  margin-bottom: 1.75rem;
 }
 
 .chat {
