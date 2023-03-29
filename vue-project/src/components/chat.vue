@@ -1,38 +1,46 @@
 <template>
-    <div id="app">
-      <div id="chat-container">
-        <h1>AlcoGPT</h1>
-        <div id="messages" ref="messages">
-          <div v-for="(message, index) in messageList" :key="index" :class="message.sender.toLowerCase()">
-            <strong>{{ message.sender }}:</strong> {{ message.text }}
-          </div>
+  <div id="app">
+    <div id="chat-container">
+      <h1>AlcoGPT</h1>
+      <div id="messages" ref="messages">
+        <div
+          v-for="(message, index) in messageList"
+          :key="index"
+          :class="message.sender.toLowerCase()"
+        >
+          <strong>{{ message.sender }}:</strong> {{ message.text }}
         </div>
-        <div id="preset-questions" class="p-0.5">
-          <button
-            v-for="(question, index) in randomQuestions"
-            :key="index"
-            @click="insertPresetQuestion(question)"
-            class="bg-gray-200 text-black py-2 px-4 mr-2 mb-2 rounded-md"
-            style="margin-left: 8px !important;"
-          >
-            {{ question }}
-          </button>
-        </div>
-        <form @submit.prevent="sendMessage">
-          <input type="text" v-model="userInput" placeholder="Tapez votre message...">
-          <button type="submit">Envoyer</button>
-        </form>
       </div>
+      <div id="preset-questions" class="p-0.5">
+        <button
+          v-for="(question, index) in randomQuestions"
+          :key="index"
+          @click="sendPresetQuestion(question)"
+          class="bg-gray-200 text-black py-2 px-4 mr-2 mb-2 rounded-md"
+          style="margin-left: 8px !important"
+        >
+          {{ question }}
+        </button>
+      </div>
+      <form @submit.prevent="sendMessage">
+        <input
+          type="text"
+          v-model="userInput"
+          placeholder="Tapez votre message..."
+        />
+        <button type="submit">Envoyer</button>
+      </form>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        userInput: "",
-        messageList: [],
-        allQuestions: [
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      userInput: "",
+      messageList: [],
+      allQuestions: [
         "Quel est le meilleur cocktail ?",
         "Comment préparer un mojito ?",
         "Quelle est la différence entre whisky et bourbon ?",
@@ -90,167 +98,179 @@
         "Quelle est la différence entre vin rouge et vin blanc ?",
         "Comment préparer un Kir Royal ?",
         "Qu'est-ce qu'un cocktail Bellini ?",
-        ],
-        randomQuestions: [],
-      };
+      ],
+      randomQuestions: [],
+    };
+  },
+  methods: {
+    scrollToBottom() {
+      const messages = this.$refs.messages;
+      messages.scrollTop = messages.scrollHeight;
     },
-    methods: {
-      scrollToBottom() {
-        const messages = this.$refs.messages;
-        messages.scrollTop = messages.scrollHeight;
-      },
-      addMessage(sender, text) {
+    addMessage(sender, text) {
       this.messageList.push({ sender, text });
       this.$nextTick(() => {
         this.scrollToBottom();
       });
     },
-        async sendToChatGPT(message) {
-          const context = "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes.";
-          const systemMessage = "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool";
-          const messageHistory = this.messageList.map(m => `${m.sender}: ${m.text}`).join('\n');
-          const prompt = `${context}\n${systemMessage}\n${messageHistory}\nUser: ${message}`;
-          
-          const requestOptions = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer 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`
-            },
-            body: JSON.stringify({
-              'prompt': prompt,
-              'max_tokens': 3000,
-            })
-          };
-    
-          try {
-            const response = await fetch('https://api.openai.com/v1/engines/text-davinci-003/completions', requestOptions);
-    
-            if (!response.ok) {
-              const errorData = await response.json();
-              console.error('Error data:', errorData);
-              return `API Error: ${response.status} ${response.statusText}`;
-            }
-    
-            const data = await response.json();
-            return data.choices[0].text.trim();
-          } catch (error) {
-            console.error('Error:', error);
-            return 'An error occurred. Please try again.';
-          }
+    async sendToChatGPT(message) {
+      const context =
+        "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes.";
+      const systemMessage =
+        "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool";
+      const messageHistory = this.messageList
+        .map((m) => `${m.sender}: ${m.text}`)
+        .join("\n");
+      const prompt = `${context}\n${systemMessage}\n${messageHistory}\nUser: ${message}`;
+
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer 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`,
         },
-      insertPresetQuestion(question) {
-        this.userInput = question;
-      },
-      generateRandomQuestions() {
-        const questionCount = 2;
-        this.randomQuestions = [];
-        const shuffledQuestions = this.allQuestions.sort(() => Math.random() - 0.5);
-  
-        for (let i = 0; i < questionCount && i < shuffledQuestions.length; i++) {
-          this.randomQuestions.push(shuffledQuestions[i]);
+        body: JSON.stringify({
+          prompt: prompt,
+          max_tokens: 3000,
+        }),
+      };
+
+      try {
+        const response = await fetch(
+          "https://api.openai.com/v1/engines/text-davinci-003/completions",
+          requestOptions
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Error data:", errorData);
+          return `API Error: ${response.status} ${response.statusText}`;
         }
-      },
-      async sendMessage() {
-        const userInput = this.userInput.trim();
-        if (!userInput) return;
-  
-        this.addMessage("User ", userInput);
-        this.userInput = "";
-  
-        const response = await this.sendToChatGPT(userInput);
-        this.addMessage("ChatGPT ", response);
-  
-        this.generateRandomQuestions();
-      },
+
+        const data = await response.json();
+        return data.choices[0].text.trim();
+      } catch (error) {
+        console.error("Error:", error);
+        return "An error occurred. Please try again.";
+      }
     },
-    mounted() {
+    sendPresetQuestion(question) {
+      this.userInput = question;
+      this.sendMessage(); // Ajoutez cette ligne pour envoyer la question directement à ChatGPT
+    },
+    generateRandomQuestions() {
+      const questionCount = 2;
+      this.randomQuestions = [];
+      const shuffledQuestions = this.allQuestions.sort(
+        () => Math.random() - 0.5
+      );
+
+      for (let i = 0; i < questionCount && i < shuffledQuestions.length; i++) {
+        this.randomQuestions.push(shuffledQuestions[i]);
+      }
+    },
+    async sendMessage() {
+      const userInput = this.userInput.trim();
+      if (!userInput) return;
+
+      this.addMessage("User ", userInput);
+      this.userInput = "";
+
+      const response = await this.sendToChatGPT(userInput);
+      this.addMessage("ChatGPT ", response);
+
       this.generateRandomQuestions();
     },
-  };
-  </script>
-  
-  <style scoped>
-  body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  #chat-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 450px;
-    height: 87vh;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-  
-  h1 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: #ffffff;
-    background-color: #000000;
-    padding: 15px;
-    padding-left: 20px;
-    margin: 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  #messages {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
-  .user, .chatgpt {
-    margin-bottom: 20px;
-  }
-  
-  .user strong, .chatgpt strong {
-    font-weight: 600;
-  }
-  
-  .user {
-    font-family: 'Roboto', sans-serif;
-    color: #000000;
-  }
-  
-  .chatgpt {
-    font-family: 'Roboto', sans-serif;;
-    color: #0084ff;
-  }
-  
-  form {
-    display: flex;
-    background-color: #ffffff;
-    padding: 10px;
-    border-top: 1px solid #eee;
-  }
-  
-  input[type="text"] {
-    flex-grow: 1;
-    font-size: 16px;
-    border: 1px solid #ffffff;
-    border-radius: 10px;
-    outline: none;
-  }
-  
-  button {
-    font-size: 16px;
-    background-color: #000000;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 10px;
-    margin-left: 10px
-  }
-  </style>
+  },
+  mounted() {
+    this.generateRandomQuestions();
+  },
+};
+</script>
+
+<style scoped>
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  height: 87vh;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #000000;
+  padding: 15px;
+  padding-left: 20px;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+}
+
+#messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.user,
+.chatgpt {
+  margin-bottom: 20px;
+}
+
+.user strong,
+.chatgpt strong {
+  font-weight: 600;
+}
+
+.user {
+  font-family: "Roboto", sans-serif;
+  color: #000000;
+}
+
+.chatgpt {
+  font-family: "Roboto", sans-serif;
+  color: #0084ff;
+}
+
+form {
+  display: flex;
+  background-color: #ffffff;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  font-size: 16px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  outline: none;
+}
+
+button {
+  font-size: 16px;
+  background-color: #000000;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+</style>
