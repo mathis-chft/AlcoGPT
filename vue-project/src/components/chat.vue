@@ -23,14 +23,14 @@
         </button>
         <div id="loading-animation" v-if="isLoading"></div>
       </div>
-      <!-- <form @submit.prevent="sendMessage">
+      <form @submit.prevent="sendMessage">
         <input
           type="text"
           v-model="userInput"
           placeholder="Tapez votre message..."
         />
         <button type="submit">Envoyer</button>
-      </form> -->
+      </form>
     </div>
   </div>
 </template>
@@ -177,13 +177,13 @@ export default {
   const userInput = this.userInput.trim();
   if (!userInput) return;
 
-  this.addMessage("User ", userInput);
+  this.addMessage("Utilisateur ", userInput);
   this.userInput = "";
 
   this.isLoading = true; // Activer l'animation
 
   const response = await this.sendToChatGPT(userInput);
-  this.addMessage("ChatGPT ", response);
+  this.addMessage("AlcoGPT ", response);
 
   this.isLoading = false; // Désactiver l'animation
 
@@ -281,7 +281,7 @@ h1 span {
   overflow-y: auto;
 }
 
-.user,
+.utilisateur,
 .chatgpt {
   margin-bottom: 20px;
 }
@@ -295,7 +295,7 @@ h1 span {
   color: #000000;
 }
 
-.chatgpt {
+.alcogpt {
   font-family: "Roboto", sans-serif;
   color: #0084ff;
 }
