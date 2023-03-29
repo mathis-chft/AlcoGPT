@@ -1,11 +1,7 @@
 <template>
   <div class="home">
     <Navbar></Navbar>
-    <chat class="mt-10"></chat>
-    <ProductCard></ProductCard>
-    <RecipeCard></RecipeCard>
-    <Home />
-
+    <Home/>
   </div>
 </template>
 

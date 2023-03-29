@@ -184,8 +184,8 @@
   #chat-container {
     display: flex;
     flex-direction: column;
-    max-width: 350px;
-    height: 80vh;
+    max-width: 450px;
+    height: 85vh;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
