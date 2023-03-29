@@ -221,7 +221,7 @@ export default {
   height: 6px;
   background-color: transparent;
   overflow: hidden;
-  border-radius: 9999;
+  border-radius: 10;
 }
 
 #loading-animation:before {
