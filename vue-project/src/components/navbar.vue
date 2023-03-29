@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <img src="../assets/Alcotaste.png" alt="logo" class="logo w-auto h-12" />
+    <img src="../assets/Alcotaste.png" alt="logo" class="logo w-auto h-16" />
     <router-link to="/" class="navbar-item">Accueil</router-link>
     <router-link to="/nos-produits" class="navbar-item"
       >Nos produits</router-link
@@ -43,8 +43,8 @@ export default {
 
 .logo {
   float: left;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 30px;
+  margin-right: 40px;
   align-content: center;
 }
 </style>

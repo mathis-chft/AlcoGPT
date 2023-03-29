@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="chat-container">
-      <h1>AlcoGPT</h1>
+      <h1 class="titre">AlcoGPT <span>• Votre assistant alcoolique</span></h1>
       <div id="messages" ref="messages">
         <div
           v-for="(message, index) in messageList"
@@ -22,14 +22,14 @@
           {{ question }}
         </button>
       </div>
-      <form @submit.prevent="sendMessage">
+      <!-- <form @submit.prevent="sendMessage">
         <input
           type="text"
           v-model="userInput"
           placeholder="Tapez votre message..."
         />
         <button type="submit">Envoyer</button>
-      </form>
+      </form> -->
     </div>
   </div>
 </template>
@@ -41,6 +41,8 @@ export default {
       userInput: "",
       messageList: [],
       allQuestions: [
+        "Quel est le meilleur cocktail ?",
+        "Comment préparer un mojito ?",
         "Quel est le meilleur cocktail ?",
         "Comment préparer un mojito ?",
         "Quelle est la différence entre whisky et bourbon ?",
@@ -159,7 +161,7 @@ export default {
       this.sendMessage(); // Ajoutez cette ligne pour envoyer la question directement à ChatGPT
     },
     generateRandomQuestions() {
-      const questionCount = 2;
+      const questionCount = 4;
       this.randomQuestions = [];
       const shuffledQuestions = this.allQuestions.sort(
         () => Math.random() - 0.5
@@ -212,6 +214,7 @@ body {
 }
 
 h1 {
+  display: inline-block;
   font-family: "Roboto", sans-serif;
   font-size: 26px;
   font-weight: 700;
@@ -221,6 +224,11 @@ h1 {
   padding-left: 20px;
   margin: 0;
   border-bottom: 1px solid #eee;
+}
+
+h1 span {
+  font-weight: 500;
+  font-size: 17px;
 }
 
 #messages {
@@ -238,7 +246,6 @@ h1 {
 .chatgpt strong {
   font-weight: 600;
 }
-
 .user {
   font-family: "Roboto", sans-serif;
   color: #000000;
