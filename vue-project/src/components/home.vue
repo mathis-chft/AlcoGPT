@@ -72,6 +72,7 @@
 }
 
 .banner {
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   display: flex;
   width: 90%;
