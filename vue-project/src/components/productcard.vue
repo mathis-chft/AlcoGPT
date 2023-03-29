@@ -23,7 +23,7 @@
   
   <style>
   .product {
-    width: 100%;
+    width: 43%;
     text-align: center;
   }
   

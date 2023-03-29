@@ -68,13 +68,13 @@
 .category {
   justify-content: space-around;
   display: flex;
-  padding: 1rem;
+  padding: 0rem;
 }
 
 .banner {
   display: flex;
-  width: 96%;
-  height: 200px;
+  width: 90%;
+  height: 150px;
   background-image: url('https://alcohome.com/wp-content/uploads/2020/10/specialty-drinks-1.png');
   background-size: cover;
   background-position: center;

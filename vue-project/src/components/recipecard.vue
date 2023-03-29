@@ -23,9 +23,8 @@
   
   <style>
   .recipe {
-    width: 100%;
+    width: 43%;
     text-align: center;
-    padding: 1rem;
   }
   
   .recipe img {
