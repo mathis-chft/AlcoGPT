@@ -114,7 +114,7 @@
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer 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`
+              'Authorization': `Bearer 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`
             },
             body: JSON.stringify({
               'prompt': prompt,
