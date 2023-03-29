@@ -317,11 +317,18 @@ input[type="text"] {
 
 button {
   font-size: 16px;
-  background-color: #000000;
-  color: white;
+  background-color: black;
+  color: rgb(255, 255, 255);
   padding: 8px 16px;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 10px;
   margin-left: 10px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: transparent;
+  border-color: #000000;
+  color: #000000;
 }
 </style>
