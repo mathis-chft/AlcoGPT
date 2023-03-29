@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <img src="../assets/Alcotaste.png" alt="logo" class="logo w-auto h-16" />
+    <img src="../assets/Alcotaste.png" alt="logo" class="logo w-auto h-14" />
     <router-link to="/" class="navbar-item">Accueil</router-link>
     <router-link to="/nos-produits" class="navbar-item"
       >Nos produits</router-link

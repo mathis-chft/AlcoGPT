@@ -43,7 +43,7 @@ export default {
         {
           image:
             "https://assets.afcdn.com/recipe/20210312/118530_w3072h2304c1cx1060cy707.jpg",
-          name: "whisky",
+          name: "Whisky",
         },
         {
           image:

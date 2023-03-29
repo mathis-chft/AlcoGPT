@@ -21,6 +21,7 @@
         >
           {{ question }}
         </button>
+        <div id="loading-animation" v-if="isLoading"></div>
       </div>
       <!-- <form @submit.prevent="sendMessage">
         <input
@@ -38,6 +39,7 @@
 export default {
   data() {
     return {
+      isLoading: false,
       userInput: "",
       messageList: [],
       allQuestions: [
@@ -172,17 +174,21 @@ export default {
       }
     },
     async sendMessage() {
-      const userInput = this.userInput.trim();
-      if (!userInput) return;
+  const userInput = this.userInput.trim();
+  if (!userInput) return;
 
-      this.addMessage("User ", userInput);
-      this.userInput = "";
+  this.addMessage("User ", userInput);
+  this.userInput = "";
 
-      const response = await this.sendToChatGPT(userInput);
-      this.addMessage("ChatGPT ", response);
+  this.isLoading = true; // Activer l'animation
 
-      this.generateRandomQuestions();
-    },
+  const response = await this.sendToChatGPT(userInput);
+  this.addMessage("ChatGPT ", response);
+
+  this.isLoading = false; // Désactiver l'animation
+
+  this.generateRandomQuestions();
+},
   },
   mounted() {
     this.generateRandomQuestions();
@@ -191,6 +197,44 @@ export default {
 </script>
 
 <style scoped>
+
+@keyframes loading {
+  0% {
+    left: 0;
+    right: 100%;
+    border-radius: 20px;
+  }
+  50% {
+    left: 50%;
+    right: 50%;
+    border-radius: 20px;
+  }
+  100% {
+    left: 0;
+    right: 100%;
+    border-radius: 20px;
+  }
+}
+
+#loading-animation {
+  position: relative;
+  height: 6px;
+  background-color: transparent;
+  overflow: hidden;
+  border-radius: 9999;
+}
+
+#loading-animation:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background-color: #0084ff;
+  animation: loading 2s ease-in-out infinite;
+  border-radius: 9999;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f0f0f0;
