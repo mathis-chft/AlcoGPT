@@ -114,7 +114,7 @@
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer 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`
+              'Authorization': `Bearer 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`
             },
             body: JSON.stringify({
               'prompt': prompt,
@@ -185,7 +185,7 @@
     display: flex;
     flex-direction: column;
     max-width: 450px;
-    height: 85vh;
+    height: 83vh;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);

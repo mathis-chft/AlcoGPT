@@ -25,11 +25,13 @@
   .recipe {
     width: 43%;
     text-align: center;
+    box-shadow: none !important;
   }
   
   .recipe img {
     width: 100%;
     height: auto;
+    border-radius: 20px;
   }
   </style>
   

@@ -46,7 +46,7 @@
           },
           {
             image: "https://www.les-covoyageurs.com/ressources/images-lieux/photo-lieu-1167-2.jpg",
-            name: "Nom du produit 2",
+            name: "mdr j'ai pas d'idée",
           },
         ],
         recipes: [
@@ -66,12 +66,13 @@
 
 <style>
 .category {
+  font-weight: 700;
   justify-content: space-around;
   display: flex;
-  padding: 0rem;
 }
 
 .banner {
+  border-radius: 20px;
   display: flex;
   width: 90%;
   height: 150px;
@@ -84,7 +85,7 @@
 
 .chat {
   padding-top: 1rem;
-  margin-left: auto;
+  margin-left: 0.5rem;
   margin-right: auto;
 }
 </style>
