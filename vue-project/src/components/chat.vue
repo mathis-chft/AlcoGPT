@@ -178,7 +178,7 @@ export default {
         if (!response.ok) {
           const errorData = await response.json();
           console.error("Error data:", errorData);
-          return `Il semblerait qu'il y'ait un petit problème d'API, cher Cédric, cher Flo, cher Laurent, on a preshot ce genre de problème. Vous avez peut être besoin du code erreur non ? Le voici : Erreur ${response.status} ${response.statusText}`;
+          return `Il semblerait qu'il y'ait un petit problème d'API, cher Cédric, cher Flo, cher Laurent, il semblerait qu'on ai preshot ce genre de problème. Vous avez peut être besoin du code erreur non ? Le voici : Erreur ${response.status} ${response.statusText}`;
         }
 
         const data = await response.json();
@@ -186,7 +186,7 @@ export default {
         return responseText.replace(/^AlcoGPT\s*:\s*/i, '').replace(/^Réponse\s*:\s*/i, '');
       } catch (error) {
         console.error("Error:", error);
-        return "Il semblerait qu'il y'ait un petit problème de connexion, cher Cédric, cher Flo, cher Laurent, on a preshot ce genre de problème.";
+        return "Il semblerait qu'il y'ait un petit problème de connexion, cher Cédric, cher Flo, cher Laurent, il semblerait qu'on ai preshot ce genre de problème.";
       }
     },
     sendPresetQuestion(question) {
