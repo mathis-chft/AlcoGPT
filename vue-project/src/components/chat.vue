@@ -2,17 +2,6 @@
   <div id="app">
     <div id="chat-container">
       <h1 class="titre">AlcoGPT <span>• Votre assistant alcoolique</span></h1>
-      <button
-  @click="toggleFullscreen"
-  style="
-    background-color: transparent;
-    border: none;
-    color: white;
-    margin-left: 10px;
-  "
->
-  {{ fullscreen ? "Quitter plein écran" : "Plein écran" }}
-</button>
       <div id="messages" ref="messages">
         <div
           v-for="(message, index) in messageList"
@@ -119,36 +108,37 @@ export default {
   },
   methods: {
     async typeResponse(response) {
-  let responseIndex = 0;
-  const typingDelay = 5; // Ajustez cette valeur pour changer la vitesse de frappe
+      let responseIndex = 0;
+      const typingDelay = 5; // Ajustez cette valeur pour changer la vitesse de frappe
 
-  // Ajouter un message vide pour AlcoGPT
-  this.addMessage("AlcoGPT", "");
+      // Ajouter un message vide pour AlcoGPT
+      this.addMessage("AlcoGPT", "");
 
-  return new Promise((resolve) => {
-    const typeNextChar = () => {
-      if (responseIndex < response.length) {
-        // Mettre à jour le dernier message de AlcoGPT avec le texte partiel
-        this.messageList[this.messageList.length - 1].text = response.slice(0, responseIndex + 1);
-        responseIndex++;
-        this.scrollToBottom(); // Ajouter cette ligne pour faire défiler automatiquement le chat
-        setTimeout(typeNextChar, typingDelay);
-      } else {
-        resolve();
-      }
-    };
-    typeNextChar();
-  });
-},
+      return new Promise((resolve) => {
+        const typeNextChar = () => {
+          if (responseIndex < response.length) {
+            // Mettre à jour le dernier message de AlcoGPT avec le texte partiel
+            this.messageList[this.messageList.length - 1].text = response.slice(
+              0,
+              responseIndex + 1
+            );
+            responseIndex++;
+            this.scrollToBottom(); // Ajouter cette ligne pour faire défiler automatiquement le chat
+            setTimeout(typeNextChar, typingDelay);
+          } else {
+            resolve();
+          }
+        };
+        typeNextChar();
+      });
+    },
 
+    scrollToBottom() {
+      const messages = this.$refs.messages;
+      const lastMessage = messages.lastElementChild;
 
-
-scrollToBottom() {
-  const messages = this.$refs.messages;
-  const lastMessage = messages.lastElementChild;
-
-  lastMessage.scrollIntoView({ behavior: 'smooth' });
-},
+      lastMessage.scrollIntoView({ behavior: "smooth" });
+    },
 
     addMessage(sender, text) {
       this.messageList.push({ sender, text });
@@ -199,7 +189,7 @@ scrollToBottom() {
     },
     sendPresetQuestion(question) {
       this.userInput = question;
-      this.sendMessage()
+      this.sendMessage();
     },
     generateRandomQuestions() {
       const questionCount = 4;
@@ -213,24 +203,22 @@ scrollToBottom() {
       }
     },
     async sendMessage() {
-  const userInput = this.userInput.trim();
-  if (!userInput) return;
+      const userInput = this.userInput.trim();
+      if (!userInput) return;
 
-  this.addMessage("Utilisateur", userInput);
-  this.userInput = "";
+      this.addMessage("Utilisateur", userInput);
+      this.userInput = "";
 
-  this.isLoading = true;
+      this.isLoading = true;
 
-  const response = await this.sendToChatGPT(userInput);
-  // Pas besoin de supprimer le dernier message partiel de AlcoGPT
-  await this.typeResponse(response);
+      const response = await this.sendToChatGPT(userInput);
+      // Pas besoin de supprimer le dernier message partiel de AlcoGPT
+      await this.typeResponse(response);
 
-  this.isLoading = false;
+      this.isLoading = false;
 
-  this.generateRandomQuestions();
-},
-
-
+      this.generateRandomQuestions();
+    },
   },
   mounted() {
     this.generateRandomQuestions();
@@ -239,7 +227,6 @@ scrollToBottom() {
 </script>
 
 <style scoped>
-
 @keyframes loading {
   0% {
     left: 0;
@@ -375,7 +362,7 @@ input[type="text"] {
 }
 
 .envoyer {
-    font-size: 16px;
+  font-size: 16px;
   background-color: black;
   color: rgb(255, 255, 255);
   padding: 8px 16px;
@@ -384,5 +371,4 @@ input[type="text"] {
   margin-left: 10px;
   transition: all 0.3s ease;
 }
-
 </style>
