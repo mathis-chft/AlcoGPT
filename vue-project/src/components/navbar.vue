@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <img src="../assets/Alcotaste.png" alt="logo" class="logo w-auto h-14" />
+    <img src="../assets/Alcotaste.png" alt="logo" class="logo w-auto h-12" />
     <router-link to="/" class="navbar-item">Accueil</router-link>
     <router-link to="/nos-produits" class="navbar-item"
       >Nos produits</router-link
@@ -30,16 +30,16 @@ export default {
   float: left;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 18px;
   text-decoration: none;
-  font-size: 17px;
-  border-radius: 20px;
+  font-size: 16px;
+  border-radius: 10px;
 }
 
 .navbar-item:hover {
   background-color: #ffffff;
   color: black;
-  border-radius: 20px;
+  border-radius: 10px;
   transition: all 0.5s ease;
 }
 

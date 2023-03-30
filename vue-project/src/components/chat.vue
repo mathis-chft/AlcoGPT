@@ -160,7 +160,7 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer `,
+          Authorization: `Bearer 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`,
         },
         body: JSON.stringify({
           prompt: prompt,
