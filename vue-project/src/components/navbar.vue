@@ -33,12 +33,14 @@ export default {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  border-radius: 20px;
 }
 
 .navbar-item:hover {
   background-color: #ffffff;
   color: black;
   border-radius: 20px;
+  transition: all 0.5s ease;
 }
 
 .logo {
