@@ -3,11 +3,12 @@
     <div id="chat-container">
       <h1 class="titre">AlcoGPT <span>• Votre assistant alcoolique</span></h1>
       <div id="messages" ref="messages">
-        <div
-          v-for="(message, index) in messageList"
-          :key="index"
-          :class="message.sender.toLowerCase()"
-        >
+  <div v-if="messageList.length === 0" id="empty-message">Besoin de conseils ? N'hésitez pas à demander à AlcoGPT !</div>
+  <div v-else
+    v-for="(message, index) in messageList"
+    :key="index"
+    :class="message.sender.toLowerCase()"
+  >
           <strong>{{ message.sender }}:</strong> {{ message.text }}
         </div>
       </div>
@@ -148,9 +149,9 @@ export default {
     },
     async sendToChatGPT(message) {
       const context =
-        "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes. Profites en pour proumouvoir les produits de la boutique, notre entreprise s'appelle Alcotaste";
+        "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes. Profites en pour proumouvoir les produits de la boutique, notre entreprise s'appelle Alcotaste.";
       const systemMessage =
-        "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool, profites en pour proumouvoir les produits de la boutique";
+        "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool";
       const messageHistory = this.messageList
         .map((m) => `${m.sender}: ${m.text}`)
         .join("\n");
@@ -181,7 +182,8 @@ export default {
         }
 
         const data = await response.json();
-        return data.choices[0].text.trim();
+        const responseText = data.choices[0].text.trim();
+        return responseText.replace(/^AlcoGPT\s*:\s*/i, '').replace(/^Réponse\s*:\s*/i, '');
       } catch (error) {
         console.error("Error:", error);
         return "Il semblerait qu'il y'ait un petit problème de connexion, cher Cédric, cher Flo, cher Laurent, on a preshot ce genre de problème.";
@@ -290,7 +292,7 @@ body {
 h1 {
   display: inline-block;
   font-family: "Inter", sans-serif;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: #ffffff;
   background-color: #000000;
@@ -302,7 +304,7 @@ h1 {
 
 h1 span {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 #messages {
@@ -319,6 +321,7 @@ h1 span {
 .utilisateur strong,
 .alcogpt strong {
   font-weight: 700;
+  font-size: 16px;
 }
 .utilisateur {
   font-family: "Inter", sans-serif;
@@ -330,6 +333,17 @@ h1 span {
   color: #0084ff;
 }
 
+#empty-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 800;
+  color: rgb(199, 199, 204);
+}
+
 form {
   display: flex;
   background-color: #ffffff;
@@ -339,7 +353,7 @@ form {
 
 input[type="text"] {
   flex-grow: 1;
-  font-size: 16px;
+  font-size: 15px;
   border: 1px solid #ffffff;
   border-radius: 10px;
   outline: none;
@@ -347,7 +361,7 @@ input[type="text"] {
 
 .questions_random {
   font-family: Inter, sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   background-color: black;
   color: rgb(255, 255, 255);
   padding: 8px 16px;
@@ -364,7 +378,7 @@ input[type="text"] {
 }
 
 .envoyer {
-  font-size: 16px;
+  font-size: 15px;
   background-color: black;
   color: rgb(255, 255, 255);
   padding: 8px 16px;
@@ -376,6 +390,7 @@ input[type="text"] {
 
 #messages {
   flex-grow: 1;
+  font-size: 15px;
   padding: 20px;
   overflow-y: auto;
   overflow-x: hidden;
