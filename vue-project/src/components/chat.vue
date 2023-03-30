@@ -160,7 +160,7 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer `,
         },
         body: JSON.stringify({
           prompt: prompt,
@@ -177,7 +177,7 @@ export default {
         if (!response.ok) {
           const errorData = await response.json();
           console.error("Error data:", errorData);
-          return `API Error: ${response.status} ${response.statusText}`;
+          return `Il semblerait qu'il y'ait un petit problème d'API, cher Cédric, cher Flo, cher Laurent, on a preshot ce genre de problème. Vous avez peut être besoin du code erreur non ? Le voici : Erreur ${response.status} ${response.statusText}`;
         }
 
         const data = await response.json();
