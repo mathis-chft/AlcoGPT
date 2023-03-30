@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="chat-container">
-      <h1 class="titre">AlcoGPT<span> • Votre assistant alcoolique</span></h1>
+      <h1 class="titre">AlcoGPT <span>• Votre assistant alcoolique</span></h1>
       <div id="messages" ref="messages">
         <div
           v-for="(message, index) in messageList"
@@ -109,7 +109,7 @@ export default {
   methods: {
     async typeResponse(response) {
       let responseIndex = 0;
-      const typingDelay = 5; // Ajustez cette valeur pour changer la vitesse de frappe
+      const typingDelay = 10; // Ajustez cette valeur pour changer la vitesse de frappe
 
       // Ajouter un message vide pour AlcoGPT
       this.addMessage("AlcoGPT", "");
@@ -148,9 +148,9 @@ export default {
     },
     async sendToChatGPT(message) {
       const context =
-        "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes.";
+        "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes. Profites en pour proumouvoir les produits de la boutique, notre entreprise s'appelle Alcotaste.";
       const systemMessage =
-        "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool";
+        "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool, profites en pour proumouvoir les produits de la boutique";
       const messageHistory = this.messageList
         .map((m) => `${m.sender}: ${m.text}`)
         .join("\n");
@@ -227,6 +227,7 @@ export default {
 </script>
 
 <style scoped>
+
 @keyframes loading {
   0% {
     left: 0;
@@ -265,7 +266,7 @@ export default {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #f0f0f0;
   margin: 0;
   padding: 0;
@@ -288,7 +289,7 @@ body {
 
 h1 {
   display: inline-block;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 26px;
   font-weight: 700;
   color: #ffffff;
@@ -320,12 +321,12 @@ h1 span {
   font-weight: 600;
 }
 .utilisateur {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #000000;
 }
 
 .alcogpt {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #0084ff;
 }
 
@@ -345,6 +346,7 @@ input[type="text"] {
 }
 
 .questions_random {
+  font-family: Inter, sans-serif;
   font-size: 16px;
   background-color: black;
   color: rgb(255, 255, 255);
@@ -370,5 +372,18 @@ input[type="text"] {
   border-radius: 10px;
   margin-left: 10px;
   transition: all 0.3s ease;
+}
+
+#messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* pour Firefox */
+  -ms-overflow-style: none; /* pour IE et Edge */
+}
+
+#messages::-webkit-scrollbar {
+  display: none; /* pour Chrome, Safari, et Opera */
 }
 </style>

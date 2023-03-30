@@ -73,6 +73,7 @@ export default {
   font-weight: 700;
   justify-content: space-around;
   display: flex;
+  margin-top: 16px;
 }
 
 .banner {
@@ -86,7 +87,8 @@ export default {
   background-position: center;
   margin-left: 32.5px !important;
   margin-right: auto;
-  margin-bottom: 1.75rem;
+  margin-bottom: 2.5rem;
+  margin-top: 18px;
 }
 
 .chat {
