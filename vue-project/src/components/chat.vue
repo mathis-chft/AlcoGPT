@@ -2,6 +2,17 @@
   <div id="app">
     <div id="chat-container">
       <h1 class="titre">AlcoGPT <span>• Votre assistant alcoolique</span></h1>
+      <button
+  @click="toggleFullscreen"
+  style="
+    background-color: transparent;
+    border: none;
+    color: white;
+    margin-left: 10px;
+  "
+>
+  {{ fullscreen ? "Quitter plein écran" : "Plein écran" }}
+</button>
       <div id="messages" ref="messages">
         <div
           v-for="(message, index) in messageList"
@@ -16,21 +27,21 @@
           v-for="(question, index) in randomQuestions"
           :key="index"
           @click="sendPresetQuestion(question)"
-          class="bg-gray-200 text-black py-2 px-4 mr-2 mb-2 rounded-md"
+          class="questions_random bg-gray-200 text-black py-2 px-4 mr-2 mb-2 rounded-md"
           style="margin-left: 8px !important"
         >
           {{ question }}
         </button>
         <div id="loading-animation" v-if="isLoading"></div>
       </div>
-      <form @submit.prevent="sendMessage">
+      <!-- <form @submit.prevent="sendMessage">
         <input
           type="text"
           v-model="userInput"
           placeholder="Tapez votre message..."
         />
-        <button type="submit">Envoyer</button>
-      </form>
+        <button class="envoyer" type="submit">Envoyer</button>
+      </form> -->
     </div>
   </div>
 </template>
@@ -107,10 +118,38 @@ export default {
     };
   },
   methods: {
-    scrollToBottom() {
-      const messages = this.$refs.messages;
-      messages.scrollTop = messages.scrollHeight;
-    },
+    async typeResponse(response) {
+  let responseIndex = 0;
+  const typingDelay = 5; // Ajustez cette valeur pour changer la vitesse de frappe
+
+  // Ajouter un message vide pour AlcoGPT
+  this.addMessage("AlcoGPT", "");
+
+  return new Promise((resolve) => {
+    const typeNextChar = () => {
+      if (responseIndex < response.length) {
+        // Mettre à jour le dernier message de AlcoGPT avec le texte partiel
+        this.messageList[this.messageList.length - 1].text = response.slice(0, responseIndex + 1);
+        responseIndex++;
+        this.scrollToBottom(); // Ajouter cette ligne pour faire défiler automatiquement le chat
+        setTimeout(typeNextChar, typingDelay);
+      } else {
+        resolve();
+      }
+    };
+    typeNextChar();
+  });
+},
+
+
+
+scrollToBottom() {
+  const messages = this.$refs.messages;
+  const lastMessage = messages.lastElementChild;
+
+  lastMessage.scrollIntoView({ behavior: 'smooth' });
+},
+
     addMessage(sender, text) {
       this.messageList.push({ sender, text });
       this.$nextTick(() => {
@@ -160,7 +199,7 @@ export default {
     },
     sendPresetQuestion(question) {
       this.userInput = question;
-      this.sendMessage(); // Ajoutez cette ligne pour envoyer la question directement à ChatGPT
+      this.sendMessage()
     },
     generateRandomQuestions() {
       const questionCount = 4;
@@ -177,18 +216,21 @@ export default {
   const userInput = this.userInput.trim();
   if (!userInput) return;
 
-  this.addMessage("Utilisateur ", userInput);
+  this.addMessage("Utilisateur", userInput);
   this.userInput = "";
 
-  this.isLoading = true; // Activer l'animation
+  this.isLoading = true;
 
   const response = await this.sendToChatGPT(userInput);
-  this.addMessage("AlcoGPT ", response);
+  // Pas besoin de supprimer le dernier message partiel de AlcoGPT
+  await this.typeResponse(response);
 
-  this.isLoading = false; // Désactiver l'animation
+  this.isLoading = false;
 
   this.generateRandomQuestions();
 },
+
+
   },
   mounted() {
     this.generateRandomQuestions();
@@ -282,15 +324,15 @@ h1 span {
 }
 
 .utilisateur,
-.chatgpt {
+.alcogpt {
   margin-bottom: 20px;
 }
 
-.user strong,
-.chatgpt strong {
+.utilisateur strong,
+.alcogpt strong {
   font-weight: 600;
 }
-.user {
+.utilisateur {
   font-family: "Roboto", sans-serif;
   color: #000000;
 }
@@ -315,7 +357,7 @@ input[type="text"] {
   outline: none;
 }
 
-button {
+.questions_random {
   font-size: 16px;
   background-color: black;
   color: rgb(255, 255, 255);
@@ -326,9 +368,21 @@ button {
   transition: all 0.3s ease;
 }
 
-button:hover {
+.questions_random:hover {
   background-color: transparent;
   border-color: #000000;
   color: #000000;
 }
+
+.envoyer {
+    font-size: 16px;
+  background-color: black;
+  color: rgb(255, 255, 255);
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+}
+
 </style>
