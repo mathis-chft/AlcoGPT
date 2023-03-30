@@ -47,7 +47,7 @@ export default {
         },
         {
           image:
-            "https://nepascene.com/wp-content/uploads/2016/03/beer-glass-bar.jpg",
+            "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
           name: "Bières",
         },
       ],
