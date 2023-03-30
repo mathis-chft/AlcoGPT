@@ -184,7 +184,7 @@ export default {
         return data.choices[0].text.trim();
       } catch (error) {
         console.error("Error:", error);
-        return "An error occurred. Please try again.";
+        return "Il semblerait qu'il y'ait un petit problème de connexion, cher Cédric, cher Flo, cher Laurent, on a preshot ce genre de problème.";
       }
     },
     sendPresetQuestion(question) {
