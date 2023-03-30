@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="chat-container">
-      <h1 class="titre">AlcoGPT <span>• Votre assistant alcoolique</span></h1>
+      <h1 class="titre">AlcoGPT<span> • Votre assistant alcoolique</span></h1>
       <div id="messages" ref="messages">
         <div
           v-for="(message, index) in messageList"
