@@ -69,6 +69,10 @@ export default {
 </script>
 
 <style>
+body {
+  font-family: Inter, sans-serif;
+}
+
 .category {
   font-weight: 700;
   justify-content: space-around;

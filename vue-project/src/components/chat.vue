@@ -112,7 +112,7 @@ export default {
       const typingDelay = 10; // Ajustez cette valeur pour changer la vitesse de frappe
 
       // Ajouter un message vide pour AlcoGPT
-      this.addMessage("AlcoGPT", "");
+      this.addMessage("AlcoGPT ", "");
 
       return new Promise((resolve) => {
         const typeNextChar = () => {
@@ -148,7 +148,7 @@ export default {
     },
     async sendToChatGPT(message) {
       const context =
-        "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes. Profites en pour proumouvoir les produits de la boutique, notre entreprise s'appelle Alcotaste.";
+        "Tu est un assistant virtuel qui s'y connaît mieux que personne en alcool et cocktails, tu ne sais rien d'autre, l'alcool est la seule connaissance que tu possèdes. Profites en pour proumouvoir les produits de la boutique, notre entreprise s'appelle Alcotaste";
       const systemMessage =
         "Tu aides les gens à faire des cocktails et à répondre uniquement à des questions basées sur l'alcool, profites en pour proumouvoir les produits de la boutique";
       const messageHistory = this.messageList
@@ -206,7 +206,7 @@ export default {
       const userInput = this.userInput.trim();
       if (!userInput) return;
 
-      this.addMessage("Utilisateur", userInput);
+      this.addMessage("Utilisateur ", userInput);
       this.userInput = "";
 
       this.isLoading = true;
@@ -301,7 +301,7 @@ h1 {
 }
 
 h1 span {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 17px;
 }
 
@@ -318,7 +318,7 @@ h1 span {
 
 .utilisateur strong,
 .alcogpt strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 .utilisateur {
   font-family: "Inter", sans-serif;
