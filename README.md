@@ -8,7 +8,7 @@ AlcoGPT est un assistant virtuel conçu pour répondre à toutes vos questions s
 
 - Liste de questions prédéfinies sur les cocktails et les boissons alcoolisées
 - Possibilité de poser des questions personnalisées
-- Réponses générées par GPT-4, un modèle de traitement du langage naturel
+- Réponses générées par GPT-3, un modèle de traitement du langage naturel
 - Animation de chargement lors de la génération des réponses
 - Interface utilisateur conviviale
 
@@ -22,7 +22,7 @@ AlcoGPT est un assistant virtuel conçu pour répondre à toutes vos questions s
 1. Clonez le dépôt GitHub :
 
 ```bash
-git clone https://github.com/votre_nom_utilisateur/alco-gpt.git
+git clone https://github.com/mathis-chft/alco-gpt.git
 
 ```
 2. Accédez au dossier du projet :
