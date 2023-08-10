@@ -24,14 +24,14 @@
         </button>
         <div id="loading-animation" v-if="isLoading"></div>
       </div>
-      <!-- <form @submit.prevent="sendMessage">
+      <form @submit.prevent="sendMessage">
         <input
           type="text"
           v-model="userInput"
           placeholder="Tapez votre message..."
         />
         <button class="envoyer" type="submit">Envoyer</button>
-      </form> -->
+      </form>
     </div>
   </div>
 </template>
@@ -161,7 +161,7 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer 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`,
         },
         body: JSON.stringify({
           prompt: prompt,
